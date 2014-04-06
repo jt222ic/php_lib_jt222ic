@@ -14,7 +14,10 @@ function loggThis($logMessageString, $includeTrace = false, $logThisObject = nul
 	logger\LogCollection::log($logMessageString, $includeTrace, $logThisObject);
 }
 
-function dumpLog() {
+/**
+* @param boolean $doDumpSuperGlobals
+*/
+function dumpLog($doDumpSuperGlobals = true) {
 	$debug = new \logger\LogView();
-	echo $debug->getDebugData();
+	echo $debug->getDebugData($doDumpSuperGlobals);
 }

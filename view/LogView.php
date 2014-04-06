@@ -6,7 +6,10 @@ namespace logger;
 
 class LogView {
 	
-	public function getDebugData() {
+	public function getDebugData($doDumpSuperGlobals) {
+
+
+		
 		
 		$dumps = "
 		<hr/>
@@ -15,14 +18,16 @@ class LogView {
 				<tr>
 					<td>";
 		
-		$dumps .= $this->arrayDump($_GET, "GET");
-		$dumps .= $this->arrayDump($_POST, "POST");
-		
-		$dumps .= $this->arrayDump($_COOKIE, "COOKIES");
-		if (isset($_SESSION)) {
-			$dumps .= $this->arrayDump($_SESSION, "SESSION");
+		if ($doDumpSuperGlobals) {
+			$dumps .= $this->arrayDump($_GET, "GET");
+			$dumps .= $this->arrayDump($_POST, "POST");
+			
+			$dumps .= $this->arrayDump($_COOKIE, "COOKIES");
+			if (isset($_SESSION)) {
+				$dumps .= $this->arrayDump($_SESSION, "SESSION");
+			}
+			$dumps .= $this->arrayDump($_SERVER, "SERVER");
 		}
-		$dumps .= $this->arrayDump($_SERVER, "SERVER");
 		
 		$debugItems = "";
 		foreach (array_reverse(\logger\LogCollection::getList()) as $item) {
