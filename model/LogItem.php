@@ -5,28 +5,37 @@ namespace logger;
 
 class LogItem {
 	//Maybe add some information hiding
-	public $m_item;
+	public $m_message;
 	public $m_object;
 	public $m_debug_backtrace;
+
+
+	/**
+	* @var String
+	*/
 	public $m_calledFrom;
 	
 	
-	public function __construct($string, $trace = false, $object = null) {
-		$this->m_item = $string;
+	public function __construct($message, $trace = false, $object = null) {
+
+		$this->m_message = $message;
+
 		if ($object != null)
 			$this->m_object = var_export($object, true);
 		
 		$this->m_debug_backtrace = debug_backtrace();
-		$this->m_calledFrom = $this->cleanFilePath($this->m_debug_backtrace[1]["file"]);
+
+		$this->m_calledFrom = $this->cleanFilePath($this->m_debug_backtrace[2]["file"]) . " " . $this->m_debug_backtrace[2]["line"];
+
+
 		if (!$trace) {
 			$this->m_debug_backtrace = null;
 		}
 		
 	}
 	
-	private function cleanFilePath($path) {
-		//$_SERVER[SCRIPT_FILENAME]
-		return $path;
+	public static function cleanFilePath($path) {
+		return substr($path, strlen($_SERVER["CONTEXT_DOCUMENT_ROOT"]));
 	}
 	 
 }

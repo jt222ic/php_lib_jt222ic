@@ -30,7 +30,7 @@ class LogView {
 		}
 		
 		$debugItems = "";
-		foreach (array_reverse(\logger\LogCollection::getList()) as $item) {
+		foreach (\logger\LogCollection::getList() as $item) {
 			$debugItems .= $this->showDebugItem($item);
 		}
 		
@@ -55,11 +55,15 @@ class LogView {
 		if ($item->m_debug_backtrace != null) {
 			$debug = "<h4>Trace:</h4>
 					 <ul>";
-			foreach (array_reverse($item->m_debug_backtrace) AS $key => $row) {
-				if ($key == 0) { //skip debug
+			foreach ($item->m_debug_backtrace AS $key => $row) {
+
+				//the two topmost items are part of the logger
+				//skip logger
+				if ($key < 2) { 
 					continue;
 				}
-				$debug .= "<li> $key " . $row['file'] . " Line : " . $row["line"] .  "</li>";
+				$key = $key - 2;
+				$debug .= "<li> $key " . LogItem::cleanFilePath($row['file']) . " Line : " . $row["line"] .  "</li>";
 			}
 			$debug .= "</ul>";
 		} else {
@@ -71,7 +75,7 @@ class LogView {
 		else 
 			$object = "";
 		$ret =  "<li>
-					<Strong>$item->m_item </strong> $item->m_calledFrom
+					<Strong>$item->m_message </strong> $item->m_calledFrom
 					<pre>$object</pre>
 					
 					$debug

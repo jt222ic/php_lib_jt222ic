@@ -10,8 +10,15 @@ require_once("view/LogView.php");
 /**
 * Logging Method
 */
-function loggThis($logMessageString, $includeTrace = false, $logThisObject = null) {
+function loggThis($logMessageString, $logThisObject = null, $includeTrace = false) {
 	logger\LogCollection::log($logMessageString, $includeTrace, $logThisObject);
+}
+
+/**
+* Logging Method
+*/
+function loggHeader($logMessageString, $logThisObject = null, $includeTrace = false) {
+	logger\LogCollection::log("<h2>$logMessageString</h2>", $includeTrace, $logThisObject);
 }
 
 /**
