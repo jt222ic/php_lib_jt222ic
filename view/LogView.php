@@ -6,50 +6,61 @@ namespace logger;
 
 class LogView {
 	
-	public function getDebugData($doDumpSuperGlobals) {
 
-
+	/**
+	* @param boolean $doDumpSuperGlobals
+	* @return string HTML 
+	*/
+	public function getDebugData($doDumpSuperGlobals = false) {
 		
-		
-		$dumps = "
-		<hr/>
-			<h2>Debug</h2>
-			<table>
-				<tr>
-					<td>";
 		
 		if ($doDumpSuperGlobals) {
-			$dumps .= $this->arrayDump($_GET, "GET");
-			$dumps .= $this->arrayDump($_POST, "POST");
-			
-			$dumps .= $this->arrayDump($_COOKIE, "COOKIES");
-			if (isset($_SESSION)) {
-				$dumps .= $this->arrayDump($_SESSION, "SESSION");
-			}
-			$dumps .= $this->arrayDump($_SERVER, "SERVER");
+			$superGlobals = $this->dumpSuperGlobals();
+		} else {
+			$superGlobals = "";
 		}
 		
 		$debugItems = "";
 		foreach (\logger\LogCollection::getList() as $item) {
 			$debugItems .= $this->showDebugItem($item);
 		}
+		$dumps = "
+			<hr/>
+			<h2>Debug</h2>
+			<table>
+				<tr>
+					<td>$superGlobals</td>
+			   		<td>
+			   			<h3>Debug Items</h3>
+			   			<ol>
+			   				$debugItems
+			   			</ol>
+				 	</td>
+				</tr>
+		    </table>";
+		return $dumps;
+	}
+
+	/**
+	* @return string HTML 
+	*/
+	private function dumpSuperGlobals() {
+		$dumps = $this->arrayDump($_GET, "GET");
+		$dumps .= $this->arrayDump($_POST, "POST");
 		
-		$dumps .= "
-					</td>
-				   		<td>
-				   			<h2>Debug Items</h2>
-				   			<ol>
-				   				$debugItems
-				   			</ol>
-					 	</td>
-					</tr>
-				   </table>";
-		//$dumps = print_r(\Debug::getList());
-		
-		//$dumps .= $this->arrayDump($_SERVER, "SERVER");
+		$dumps .= $this->arrayDump($_COOKIE, "COOKIES");
+		if (isset($_SESSION)) {
+			$dumps .= $this->arrayDump($_SESSION, "SESSION");
+		}
+		$dumps .= $this->arrayDump($_SERVER, "SERVER");
+
 		return $dumps;
 	}
 	
+	/**
+	* @param LogItem $item
+	* @return string HTML 
+	*/
 	private function showDebugItem(LogItem $item) {
 		
 		if ($item->m_debug_backtrace != null) {
@@ -71,9 +82,10 @@ class LogView {
 		}
 		
 		if ($item->m_object != null)
-			$object = var_export($item->m_object, true);
+			$object = print_r($item->m_object, true);
 		else 
 			$object = "";
+
 		$ret =  "<li>
 					<Strong>$item->m_message </strong> $item->m_calledFrom
 					<pre>$object</pre>
@@ -86,7 +98,9 @@ class LogView {
 	}
 	
 	
-	
+	/**
+	* @return string HTML 
+	*/
 	private function arrayDump($array, $title) {
 		$ret = "<h3>$title</h3>
 		
