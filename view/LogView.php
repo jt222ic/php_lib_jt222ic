@@ -2,7 +2,7 @@
 
 namespace logger;
 
-require_once("LogCollection.php");
+
 
 class LogView {
 	
