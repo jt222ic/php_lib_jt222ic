@@ -4,8 +4,11 @@ PHP Logger Library
 A simple logging library collecting and giving a little more information 
 
 	//Example code
-	\Debug::log("session started ");
+	require_once("Logger.php");
 
-	//Echo output
-	$debug = new DebugView();
-	echo $debug->getDebugData();
+
+	loggThis("write a message");
+	loggThis("include call trace", true);
+	loggThis("include an object", false, new \Exception("foo exception"));
+
+	dumpLog();
