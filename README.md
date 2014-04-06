@@ -12,4 +12,4 @@ A simple logging library collecting and giving a little more information
 	loggThis("include call trace", true);
 	loggThis("include an object", false, new \Exception("foo exception"));
 
-	dumpLog();
+	echoLog();

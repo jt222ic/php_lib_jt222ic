@@ -25,6 +25,12 @@ class LogItem {
 	* @var String script location
 	*/
 	public $m_calledFrom;
+
+	/**
+	* @var Unix microtime 
+	* see http://se1.php.net/manual/en/function.microtime.php
+	*/
+	public $m_microTime;
 	
 	
 	/**
@@ -43,6 +49,8 @@ class LogItem {
 			$this->m_object = var_export($logThisObject, true);
 		
 		$this->m_debug_backtrace = debug_backtrace();
+
+		$this->m_microTime = microtime();
 
 		$this->m_calledFrom = $this->cleanFilePath($this->m_debug_backtrace[2]["file"]) . " " . $this->m_debug_backtrace[2]["line"];
 

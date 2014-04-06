@@ -1,10 +1,12 @@
 <?php
-
-
 //This has no namespace for convenience, it should really be a common module
 require_once("model/LogCollection.php");
 require_once("view/LogView.php");
 
+
+//uses globals for convenience
+//to let us avoid create and use an object...
+$logCollection = new logger\LogCollection();
 
 /**
 * Logging Method
@@ -14,7 +16,8 @@ require_once("view/LogView.php");
 * @return void
 */
 function loggThis($logMessageString, $logThisObject = null, $includeTrace = false) {
-	logger\LogCollection::log($logMessageString, $includeTrace, $logThisObject);
+	global $logCollection;
+	$logCollection->log($logMessageString, $includeTrace, $logThisObject);
 }
 
 /**
@@ -24,7 +27,8 @@ function loggThis($logMessageString, $logThisObject = null, $includeTrace = fals
 * @return void
 */
 function loggHeader($logMessageString) {
-	logger\LogCollection::log("<h2>$logMessageString</h2>", null, false);
+	global $logCollection;
+	$logCollection->log("<h2>$logMessageString</h2>", null, false);
 }
 
 /**
@@ -32,7 +36,8 @@ function loggHeader($logMessageString) {
 * 
 * @param boolean $doDumpSuperGlobals dump $_GET, $_POST etc
 */
-function dumpLog($doDumpSuperGlobals = true) {
-	$debug = new \logger\LogView();
-	echo $debug->getDebugData($doDumpSuperGlobals);
+function echoLog($doDumpSuperGlobals = true) {
+	global $logCollection;
+	$logView = new \logger\LogView($logCollection);
+	echo $logView->getDebugData($doDumpSuperGlobals);
 }

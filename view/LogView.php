@@ -5,7 +5,12 @@ namespace logger;
 
 
 class LogView {
-	
+
+	private $log;
+
+	public function __construct(LogCollection $log) {
+		$this->log = $log;
+	}
 
 	/**
 	* @param boolean $doDumpSuperGlobals
@@ -21,23 +26,25 @@ class LogView {
 		}
 		
 		$debugItems = "";
-		foreach (\logger\LogCollection::getList() as $item) {
+		foreach ($this->log->getList() as $item) {
 			$debugItems .= $this->showDebugItem($item);
 		}
 		$dumps = "
-			<hr/>
-			<h2>Debug</h2>
-			<table>
-				<tr>
-					<td>$superGlobals</td>
-			   		<td>
-			   			<h3>Debug Items</h3>
-			   			<ol>
-			   				$debugItems
-			   			</ol>
-				 	</td>
-				</tr>
-		    </table>";
+			<div>
+				<hr/>
+				<h2>Debug</h2>
+				<table>
+					<tr>
+						<td>$superGlobals</td>
+				   		<td>
+				   			<h3>Debug Items</h3>
+				   			<ol>
+				   				$debugItems
+				   			</ol>
+					 	</td>
+					</tr>
+			    </table>
+		    </div>";
 		return $dumps;
 	}
 
@@ -69,7 +76,7 @@ class LogView {
 			foreach ($item->m_debug_backtrace AS $key => $row) {
 
 				//the two topmost items are part of the logger
-				//skip logger
+				//skip those
 				if ($key < 2) { 
 					continue;
 				}
@@ -85,9 +92,12 @@ class LogView {
 			$object = print_r($item->m_object, true);
 		else 
 			$object = "";
+		list($usec, $sec) = explode(" ", microtime());
 
+		$date = date("Y-m-d H:i:s", $sec);
 		$ret =  "<li>
-					<Strong>$item->m_message </strong> $item->m_calledFrom
+					<Strong>$item->m_message </strong> $item->m_calledFrom 
+					<div style='font-size:small'>$date $usec</div>
 					<pre>$object</pre>
 					
 					$debug
