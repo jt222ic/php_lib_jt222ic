@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\View;
+namespace logger;
 
-require_once("Debug.php");
+require_once("LogCollection.php");
 
-class DebugView {
+class LogView {
 	
 	public function getDebugData() {
 		
@@ -19,11 +19,13 @@ class DebugView {
 		$dumps .= $this->arrayDump($_POST, "POST");
 		
 		$dumps .= $this->arrayDump($_COOKIE, "COOKIES");
-		$dumps .= $this->arrayDump($_SESSION, "SESSION");
+		if (isset($_SESSION)) {
+			$dumps .= $this->arrayDump($_SESSION, "SESSION");
+		}
 		$dumps .= $this->arrayDump($_SERVER, "SERVER");
 		
 		$debugItems = "";
-		foreach (array_reverse(\Debug::getList()) as $item) {
+		foreach (array_reverse(\logger\LogCollection::getList()) as $item) {
 			$debugItems .= $this->showDebugItem($item);
 		}
 		
@@ -43,7 +45,7 @@ class DebugView {
 		return $dumps;
 	}
 	
-	private function showDebugItem(\DebugItem $item) {
+	private function showDebugItem(LogItem $item) {
 		
 		if ($item->m_debug_backtrace != null) {
 			$debug = "<h4>Trace:</h4>

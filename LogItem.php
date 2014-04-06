@@ -1,9 +1,9 @@
 <?php
 
 //This has no namespace for convenience, it should really be a common module
+namespace logger;
 
-
-class DebugItem {
+class LogItem {
 	//Maybe add some information hiding
 	public $m_item;
 	public $m_object;
