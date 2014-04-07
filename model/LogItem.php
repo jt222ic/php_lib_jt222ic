@@ -67,7 +67,13 @@ class LogItem {
 	* @return string a path
 	*/
 	public static function cleanFilePath($path) {
-		return substr($path, strlen($_SERVER["CONTEXT_DOCUMENT_ROOT"]));
+		if (isset($_SERVER["CONTEXT_DOCUMENT_ROOT"]))
+			return substr($path, strlen($_SERVER["CONTEXT_DOCUMENT_ROOT"]));
+		
+		$fullLength = strlen($_SERVER["SCRIPT_FILENAME"]); //P:/php/2013 secret/phpLoggerLib/example.php
+		$partLength = strlen($_SERVER["PHP_SELF"]); // /2013secret/phpLoggerLib/example.php
+
+		return substr($path, $fullLength - $partLength);
 	}
 	 
 }
