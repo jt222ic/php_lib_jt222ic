@@ -11,6 +11,9 @@ class LogView {
 	public function __construct(LogCollection $log) {
 		$this->log = $log;
 	}
+	
+	
+	
 
 	/**
 	* @param boolean $doDumpSuperGlobals

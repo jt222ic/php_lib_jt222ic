@@ -7,7 +7,6 @@ require_once("LogItem.php");
 class LogCollection {
 	private $logArray = array();
 	
-
 	/**
 	* Logging Method
 	* @param string $logMessageString The message you intend to log
@@ -26,4 +25,7 @@ class LogCollection {
 	public function getList() {
 		return $this->logArray;
 	}
+	
+	
+	// skapa en lagringsystem log library som kan se vad kunder har mysslyckat med order
 }
