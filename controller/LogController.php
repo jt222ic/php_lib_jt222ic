@@ -1,7 +1,5 @@
 <?php
-
 require_once("Logger.php");
-
 class LogController
 {
     
@@ -16,8 +14,6 @@ class LogController
       try{
          
           throw new Exception("an order has failed");  
-          
-// prova att kasta fel någonting
       }
       
       catch (EXCEPTION $e)
@@ -37,32 +33,14 @@ class LogController
          // ska man göra så? //
         fclose($f);
         
-         echoLog();
-         return false;
-         
-        
-      }      
-     
-        
-       
-       
-       
-       
-                // samma princip?//
-           // använder hans interface skit
-      
-      
-
-        // testar //
-      
-     // file_put_ content kan returnera med true
-        //$IP = json_decode(file_get_contents())
-        
-        
-      //  leta efter senaste server
-       
+      }  
+              
         
     }
+    public function ViewInfo()
+     {
+         //http://html.net/tutorials/php/lesson15.php
+     }
     
     
 }
