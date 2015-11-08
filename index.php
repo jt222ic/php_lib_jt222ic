@@ -17,7 +17,7 @@ echo "<< index här >>";
 
 $lg->SendingMessage();
 
-
+//gewr
 
 //försöker pusha skiten
 

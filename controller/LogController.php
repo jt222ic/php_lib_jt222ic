@@ -23,7 +23,7 @@ class LogController
       catch (EXCEPTION $e)
       { 
        //  loggthis("fel av någonting",$e);
-        $f = fopen("controller/store.txt", "a+");
+        $f = fopen("store.txt", "a+");
         fwrite($f, "ip : ");
         fwrite($f,$ip);
         fwrite($f,loggthis("an order has failed",$e));
