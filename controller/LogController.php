@@ -1,46 +1,31 @@
 <?php
 require_once("Logger.php");
+
+
 class LogController
 {
+    var $LogModel;
+    var $LogView;
     
-    public function SendingMessage()
+    public function __construct($lm,$av)
     {
-                    // ska bli true om det innehåller fel info inuti samt
-   
-       $ip = $_SERVER['REMOTE_ADDR'];  
-      $ipadress = array($_SERVER['REMOTE_ADDR']);
-      sort($ipadress);
-      
-      try{
-         
-          throw new Exception("an order has failed");  
-      }
-      
-      catch (EXCEPTION $e)
-      { 
-       //  loggthis("fel av någonting",$e);
-        $f = fopen("store.txt", "a+");
-        fwrite($f, "ip : ");
-        fwrite($f,$ip);
-        fwrite($f,loggthis("an order has failed",$e));
-        fwrite($f,"\n");
-        fwrite($f, loggThis("include call trace",true));
-        fwrite($f,"\n");
-        fwrite($f, loggThis("include an object", false, new \Exception("foo exception")));
-        fwrite($f,date("D dS M,Y h:i a"));
-        fwrite($f,"\n");
-        fwrite($f,$e);
-         // ska man göra så? //
-        fclose($f);
-        
-      }  
-              
-        
+        $LogModel = $lm;
+        $LogView = $av;
+        $this->Onclick($LogModel, $LogView);
     }
-    public function ViewInfo()
-     {
-         //http://html.net/tutorials/php/lesson15.php
-     }
-    
-    
+    public function Onclick($LogModel, $LogView)
+    {
+        if(isset($_GET["ExceptionPage"]))
+        {
+      $LogModel->SendingMessage();
+        }
+        if(isset($_GET["ViewIP"]))
+        {
+          $ips =$LogModel->ViewIp();  
+          $LogView->standard($ips);
+      }
 }
+
+}
+
+

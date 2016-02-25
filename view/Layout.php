@@ -15,20 +15,18 @@ class Layout
         <h1>Error testing -LogSystem</h1>
         '.$this->ExceptionPage().'<br>
         '.$this->ViewIPSessionTrace().'
-        '.$av->response().'                                       
-        
+        <br>
+        '.$this->Logecho().'
+        '.$this->ViewIp().'
         </div>
         </body>
         </html>';
     }
-    
-    
     public function ExceptionPage()
     {
          if(isset($_GET["ExceptionPage"]))
           {
               return '<a href=?>Custom Ordered!</a>';
-              
           }
           else
           {
@@ -45,6 +43,28 @@ class Layout
         {
             return '<a href=?View>View</a>';
         }
-        
     }
+    public function Logecho()
+    {
+         if(isset($_GET["EchoLog"]))
+        {
+            return '<a href=?>Return Home</a>';
+        }
+        else
+        {
+            return '<a href=?EchoLog>Echo Log</a>';
+        }
+    }
+     public function ViewIp()
+    {
+         if(isset($_GET["ViewIP"]))
+        {
+            return '<a href=?>Return Home</a>';
+        }
+        else
+        {
+            return '<a href=?ViewIP>View IP</a>';
+        }
+    }
+    
 }

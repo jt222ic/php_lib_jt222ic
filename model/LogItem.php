@@ -34,6 +34,7 @@ class LogItem {
 	public $m_microTime;
 	
 	
+	
 	/**
 	* Create a log item
 	*
