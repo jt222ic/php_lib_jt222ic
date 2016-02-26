@@ -5,16 +5,16 @@ class StandardView
 {
    var $count = 0; 
    
-    public function standard($ips)
+    public function GenerateIP($ips)
     {
         
+        echo'TRACES <br>';
         foreach($ips as $newIps)
         {
           
             echo'<a href="?ViewIP&ip='.substr($newIps['ipadress'],5).'">'.$newIps['ipadress'].'</a><br>';
-            
         }
-        $this->testing($ips);
+        $this->ContainSession($ips);
     }
         public function EmulateHtml()
     {
@@ -22,7 +22,7 @@ class StandardView
       return file_get_contents( "store.txt", $ipadress ); 
     }
     
-    public function testing($ips)
+    public function ContainSession($ips)
     {     
         if(isset($_GET["ip"]))
            {
@@ -32,10 +32,17 @@ class StandardView
                        echo $newIps['errormessage'];
                    }
                }
-               //var_dump($newIps);
-             //echo $newIps[$_GET["ip"];
-           }
-                
-        
+               
+           } 
     }
+       public function Showinfo()
+    {
+      echo file_get_contents( "store.txt", $ipadress ); 
+    }
+    
+    public function logEcho()
+    {
+        echolog();
+    }
+
 }

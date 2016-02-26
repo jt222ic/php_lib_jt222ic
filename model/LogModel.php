@@ -32,7 +32,7 @@ class LogModel
         fwrite($f,"\n");
         fwrite($f, loggThis("include an object", false, new \Exception("foo exception")));
         fwrite($f,date("D dS M,Y h:i a"));
-        fwrite($f,"\n");                // write in info and session traces all that shit in 
+        fwrite($f,"\n");                // write in info and session traces all that in 
         fwrite($f,$e); 
         fwrite($f,"\n");  
         fclose($f);
@@ -43,7 +43,7 @@ class LogModel
             $f = fopen("store.txt","r");
             $ips = array();
             $currentip; 
-            //$this->index = 0;
+            
             while ($line = fgets($f)) 
             {
                 $newtext = "";
@@ -53,9 +53,6 @@ class LogModel
                  {
                      
                      $currentip = substr($line,5);
-                     
-                    
-                    // $this->index++;
                      $ipcontain = substr($line,$ip);
                      $ips[$currentip]['ipadress'] = $ipcontain;           
                      continue;

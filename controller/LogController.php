@@ -22,8 +22,17 @@ class LogController
         if(isset($_GET["ViewIP"]))
         {
           $ips =$LogModel->ViewIp();  
-          $LogView->standard($ips);
+          $LogView->GenerateIP($ips);
       }
+      if(isset($_GET["View"]))
+        {
+            $LogView->Showinfo();
+        }
+         if(isset($_GET["EchoLog"]))
+        {
+            $LogView->logEcho();
+        }
+     
 }
 
 }
