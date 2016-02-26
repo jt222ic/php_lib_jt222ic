@@ -3,12 +3,10 @@
 class LogModel
 {
     
-
-  var $f;
+    
+   var $f;
    var $view;
    var $index;
-   
-   
    
     public function SendingMessage()
     {
@@ -19,7 +17,7 @@ class LogModel
       catch (EXCEPTION $e)
       { 
        
-     $ip = $_SERVER['REMOTE_ADDR'];  
+      $ip = $_SERVER['REMOTE_ADDR'];  
       $ipadress = array($_SERVER['REMOTE_ADDR']);
       sort($ipadress);
       
@@ -51,7 +49,6 @@ class LogModel
                 $incontain = substr($line, 0,5);                          // return arrays av  IP string och IP adresss skickar sedan till view eller under controller
                  if($incontain == "ip : ")
                  {
-                     
                      $currentip = substr($line,5);
                      $ipcontain = substr($line,$ip);
                      $ips[$currentip]['ipadress'] = $ipcontain;           

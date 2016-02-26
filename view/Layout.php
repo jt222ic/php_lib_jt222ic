@@ -26,7 +26,7 @@ class Layout
     {
          if(isset($_GET["ExceptionPage"]))
           {
-              return '<a href=?>Custom Ordered!</a>';
+              return '<a href=?>Custom Ordered! And it failed!</a>';
           }
           else
           {

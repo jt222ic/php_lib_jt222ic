@@ -15,26 +15,20 @@ class LogController
     }
     public function Onclick($LogModel, $LogView)
     {
-        if(isset($_GET["ExceptionPage"]))
-        {
-      $LogModel->SendingMessage();
-        }
-        if(isset($_GET["ViewIP"]))
-        {
+        //if(isset($_GET["ExceptionPage"]))      // hur ska man placera denna i View? //
+        //    {
+        // $LogModel->SendingMessage();
+      $LogView->SendingError($LogModel);
+      //  }
+       
           $ips =$LogModel->ViewIp();  
-          $LogView->GenerateIP($ips);
-      }
-      if(isset($_GET["View"]))
-        {
-            $LogView->Showinfo();
-        }
-         if(isset($_GET["EchoLog"]))
-        {
-            $LogView->logEcho();
-        }
+          $LogView->GenerateIP($ips);              // har fixat resten för att hitta sidan 
+          $LogView->Showinfo();
+          $LogView->logEcho();
+        
      
 }
-
+  // MVC --- CONTROLLER KALLAR TILL VIEW --> medan VIEW ANVÄNDER FRÅN MODELLEN
 }
 
 
