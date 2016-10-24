@@ -28,7 +28,7 @@ class LogModel
         fwrite($f,"\n");
         fwrite($f, loggThis("include call trace",true));
         fwrite($f,"\n");
-        fwrite($f, loggThis("include an object", false, new \Exception("foo exception")));
+        fwrite($f, loggThis("include an object", false, new Exception("foo exception")));
         fwrite($f,date("D dS M,Y h:i a"));
         fwrite($f,"\n");                // write in info and session traces all that in 
         fwrite($f,$e); 
