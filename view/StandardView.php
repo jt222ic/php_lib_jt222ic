@@ -56,7 +56,7 @@ if(isset($_GET["ViewIP"]))
     {
          if(isset($_GET["ExceptionPage"]))
         {
-         $LogModel->SendingMessage();
+         $LogModel->BuyProductfail();
         }
     }
 }

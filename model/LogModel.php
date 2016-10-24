@@ -8,7 +8,7 @@ class LogModel
    var $view;
    var $index;
    
-    public function SendingMessage()
+    public function BuyProductfail()
     {
       try{
          
@@ -45,7 +45,6 @@ class LogModel
             while ($line = fgets($f)) 
             {
                 $newtext = "";
-              
                 $incontain = substr($line, 0,5);                          // return arrays av  IP string och IP adresss skickar sedan till view eller under controller
                  if($incontain == "ip : ")
                  {
@@ -59,10 +58,9 @@ class LogModel
            }
             return $ips;
         }
-    
+        
     public function SeperateIp($incontain, $line)
     {
-    
         if($incontain !="ip : ")
         {
             $rad = substr($line,0);
