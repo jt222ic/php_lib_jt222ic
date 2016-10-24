@@ -2,7 +2,7 @@
 
 //This has no namespace for convenience, it should really be a common module
 
-namespace logger;
+//namespace logger;
 
 class LogItem {
 	//Maybe add some information hiding

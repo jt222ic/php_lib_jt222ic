@@ -1,6 +1,6 @@
 <?php
 
-namespace logger;
+//namespace logger;
 
 require_once("LogItem.php");
 

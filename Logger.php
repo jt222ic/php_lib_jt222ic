@@ -6,7 +6,10 @@ require_once("view/LogView.php");
 
 //uses globals for convenience
 //to let us avoid create and use an object...
-//$logCollection = new logger LogCollection();
+
+//$logCollection = new logger\LogCollection();
+
+$logCollection = new LogCollection();
 
 /**
 * Logging Method
@@ -38,6 +41,6 @@ function loggHeader($logMessageString) {
 */
 function echoLog($doDumpSuperGlobals = true) {
 	global $logCollection;
-	$logView = new \logger\LogView($logCollection);
+	$logView = new LogView($logCollection);
 	echo $logView->getDebugData($doDumpSuperGlobals);
 }
